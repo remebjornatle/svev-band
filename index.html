@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,57 +16,72 @@
 
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
-            color: #2c3e50;
+            background: #0f0f0f;
+            color: #e0e0e0;
             line-height: 1.6;
             min-height: 100vh;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            min-height: 400px;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(15, 15, 15, 0.2) 0%,
+                rgba(15, 15, 15, 0.5) 60%,
+                rgba(15, 15, 15, 1) 100%
+            );
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 60px;
+        }
+
+        .hero-text {
+            text-align: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            color: #f5f5f5;
+            text-transform: uppercase;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+            margin-bottom: 10px;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 60px 30px;
+            padding: 0 30px;
         }
 
-        header {
+        .intro {
             text-align: center;
-            margin-bottom: 80px;
+            padding: 40px 0 60px;
             animation: fadeIn 1.5s ease-in;
         }
 
-        h1 {
-            font-size: 4rem;
-            font-weight: 200;
-            letter-spacing: 0.3em;
-            color: #34495e;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-        }
-
-        .header-image {
-            width: 100%;
-            max-width: 600px;
-            height: 300px;
-            margin: 0 auto 40px;
-            background: #d5d8dc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #95a5a6;
-            font-size: 0.9rem;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .header-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .tagline {
-            font-size: 1.1rem;
-            color: #7f8c8d;
+            font-size: 1.15rem;
+            color: #b0b0b0;
             font-weight: 300;
             max-width: 600px;
             margin: 0 auto 20px;
@@ -72,16 +90,17 @@
 
         .members {
             font-size: 0.95rem;
-            color: #95a5a6;
+            color: #b8a088;
             font-style: italic;
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .divider {
             width: 60px;
             height: 1px;
-            background: #bdc3c7;
-            margin: 50px auto;
+            background: #b8a088;
+            margin: 0 auto 50px;
+            opacity: 0.5;
         }
 
         section {
@@ -90,32 +109,33 @@
         }
 
         h2 {
-            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
             font-weight: 300;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: #34495e;
+            color: #f5f5f5;
             margin-bottom: 30px;
             text-align: center;
         }
 
         .audio-container {
-            background: white;
+            background: #1e1e1e;
             padding: 30px;
-            border-radius: 2px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(184, 160, 136, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .audio-container:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-color: rgba(184, 160, 136, 0.5);
         }
 
         .audio-title {
-            font-size: 0.9rem;
-            color: #7f8c8d;
+            font-size: 0.95rem;
+            color: #b8a088;
             margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -124,22 +144,19 @@
         audio {
             width: 100%;
             outline: none;
-        }
-
-        audio::-webkit-media-controls-panel {
-            background-color: #f8f9fa;
+            filter: invert(1) hue-rotate(180deg);
         }
 
         .contact {
             text-align: center;
-            background: white;
+            background: #1e1e1e;
             padding: 40px;
-            border-radius: 2px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-radius: 4px;
+            border: 1px solid rgba(184, 160, 136, 0.2);
         }
 
         .contact a {
-            color: #5d6d7e;
+            color: #b8a088;
             text-decoration: none;
             font-size: 1.1rem;
             transition: color 0.3s ease;
@@ -148,13 +165,13 @@
         }
 
         .contact a:hover {
-            color: #34495e;
+            color: #d4bfa8;
         }
 
         footer {
             text-align: center;
             padding: 40px 0;
-            color: #95a5a6;
+            color: #555;
             font-size: 0.85rem;
         }
 
@@ -170,51 +187,79 @@
         }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 2.5rem;
-                letter-spacing: 0.2em;
+            .hero {
+                height: 60vh;
+                min-height: 300px;
             }
-            
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+                letter-spacing: 0.25em;
+            }
+
+            .hero-overlay {
+                padding-bottom: 40px;
+            }
+
             .container {
-                padding: 40px 20px;
+                padding: 0 20px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .audio-container {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Svev</h1>
-            
-            <div class="header-image">
-                <img src="band-photo.png" alt="Svev band photo">
+    <div class="hero">
+        <img src="band-photo.png" alt="Svev band photo">
+        <div class="hero-overlay">
+            <div class="hero-text">
+                <h1>Svev</h1>
             </div>
-            
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
             <p class="tagline">
                 A trio merging nordic folk music, classical music and electronics with experimental elements
             </p>
             <p class="members">
                 Øystein Stensheim · Simon Berg · Bjørn-Atle Reme
             </p>
-        </header>
+        </div>
 
         <div class="divider"></div>
 
         <section class="music-section">
             <h2>Listen</h2>
-            
+
             <div class="audio-container">
-                <div class="audio-title">Track One</div>
+                <div class="audio-title">Sample 3</div>
                 <audio controls>
-                    <source src="track1.mp3" type="audio/mpeg">
+                    <source src="sample3_mp3.mp3" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
             </div>
 
             <div class="audio-container">
-                <div class="audio-title">Track Two</div>
+                <div class="audio-title">Sample 1</div>
                 <audio controls>
-                    <source src="track2.mp3" type="audio/mpeg">
+                    <source src="Sample1_mp3.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <div class="audio-container">
+                <div class="audio-title">Sample 2</div>
+                <audio controls>
+                    <source src="Sample2_mp3.mp3" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
             </div>
@@ -230,7 +275,7 @@
         </section>
 
         <footer>
-            © 2025 Svev
+            &copy; 2026 Svev
         </footer>
     </div>
 </body>
