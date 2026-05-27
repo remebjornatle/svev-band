@@ -118,15 +118,34 @@
             text-align: center;
         }
 
-        .video-grid {
+        .video-carousel {
             display: flex;
-            gap: 15px;
+            align-items: center;
             justify-content: center;
+            gap: 16px;
+        }
+
+        .carousel-arrow {
+            background: none;
+            border: 1px solid rgba(184, 160, 136, 0.3);
+            color: #b8a088;
+            font-size: 1.4rem;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: border-color 0.2s, color 0.2s;
+            line-height: 1;
+        }
+
+        .carousel-arrow:hover {
+            border-color: rgba(184, 160, 136, 0.8);
+            color: #d4bfa8;
         }
 
         .video-thumb {
-            flex: 1;
-            max-width: 220px;
+            width: 220px;
             cursor: pointer;
             border-radius: 4px;
             overflow: hidden;
@@ -180,6 +199,7 @@
             padding: 8px 12px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            text-align: center;
         }
 
         /* Modal */
@@ -359,28 +379,16 @@
         <section class="video-section">
             <h2>Watch and Listen</h2>
 
-            <div class="video-grid">
-                <div class="video-thumb" data-id="9C6_uvqbNl0">
+            <div class="video-carousel">
+                <button class="carousel-arrow" id="prevBtn">&#8249;</button>
+                <div class="video-thumb" id="carouselThumb">
                     <div class="video-thumb-img">
-                        <img src="https://img.youtube.com/vi/9C6_uvqbNl0/maxresdefault.jpg" alt="Video 1">
+                        <img id="carouselImg" src="" alt="">
                         <div class="play-btn"></div>
                     </div>
-                    <div class="video-thumb-label">Framand</div>
+                    <div class="video-thumb-label" id="carouselLabel"></div>
                 </div>
-                <div class="video-thumb" data-id="us4nLILp_PA">
-                    <div class="video-thumb-img">
-                        <img src="https://img.youtube.com/vi/us4nLILp_PA/maxresdefault.jpg" alt="Video 2">
-                        <div class="play-btn"></div>
-                    </div>
-                    <div class="video-thumb-label">Blake</div>
-                </div>
-                <div class="video-thumb" data-id="vMelpFDjzGU">
-                    <div class="video-thumb-img">
-                        <img src="https://img.youtube.com/vi/vMelpFDjzGU/maxresdefault.jpg" alt="Video 3">
-                        <div class="play-btn"></div>
-                    </div>
-                    <div class="video-thumb-label">Dvorak</div>
-                </div>
+                <button class="carousel-arrow" id="nextBtn">&#8250;</button>
             </div>
         </section>
 
@@ -447,16 +455,45 @@
         </footer>
     </div>
     <script>
+        const videos = [
+            { id: '9C6_uvqbNl0', label: 'Framand' },
+            { id: 'us4nLILp_PA', label: 'Blake' },
+            { id: 'vMelpFDjzGU', label: 'Dvorak' }
+        ];
+
+        let current = 0;
+
+        const thumb = document.getElementById('carouselThumb');
+        const img = document.getElementById('carouselImg');
+        const label = document.getElementById('carouselLabel');
+
+        function showVideo(index) {
+            const v = videos[index];
+            img.src = `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`;
+            img.alt = v.label;
+            label.textContent = v.label;
+            thumb.dataset.id = v.id;
+        }
+
+        showVideo(current);
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            current = (current - 1 + videos.length) % videos.length;
+            showVideo(current);
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            current = (current + 1) % videos.length;
+            showVideo(current);
+        });
+
         const modal = document.getElementById('videoModal');
         const frame = document.getElementById('videoModalFrame');
         const closeBtn = document.getElementById('videoModalClose');
 
-        document.querySelectorAll('.video-thumb').forEach(thumb => {
-            thumb.addEventListener('click', () => {
-                const id = thumb.dataset.id;
-                frame.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
-                modal.classList.add('active');
-            });
+        thumb.addEventListener('click', () => {
+            frame.src = `https://www.youtube.com/embed/${videos[current].id}?autoplay=1`;
+            modal.classList.add('active');
         });
 
         function closeModal() {
