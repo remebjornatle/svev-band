@@ -229,11 +229,16 @@
             border: 0;
         }
 
+        .audio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
         .audio-container {
             background: #1e1e1e;
-            padding: 30px;
+            padding: 18px;
             border-radius: 4px;
-            margin-bottom: 20px;
             border: 1px solid rgba(184, 160, 136, 0.2);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
@@ -319,8 +324,12 @@
                 font-size: 1.4rem;
             }
 
+            .audio-grid {
+                grid-template-columns: 1fr;
+            }
+
             .audio-container {
-                padding: 20px;
+                padding: 16px;
             }
         }
     </style>
@@ -389,36 +398,38 @@
         <section class="music-section">
             <h2>Listen More</h2>
 
-            <div class="audio-container">
-                <div class="audio-title">Sample 1</div>
-                <audio controls>
-                    <source src="bach.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
+            <div class="audio-grid">
+                <div class="audio-container">
+                    <div class="audio-title">Sample 1</div>
+                    <audio controls>
+                        <source src="bach.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
 
-            <div class="audio-container">
-                <div class="audio-title">Sample 2</div>
-                <audio controls>
-                    <source src="vergene.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
+                <div class="audio-container">
+                    <div class="audio-title">Sample 2</div>
+                    <audio controls>
+                        <source src="vergene.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
 
-            <div class="audio-container">
-                <div class="audio-title">Sample 3</div>
-                <audio controls>
-                    <source src="outro1.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
+                <div class="audio-container">
+                    <div class="audio-title">Sample 3</div>
+                    <audio controls>
+                        <source src="outro1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
 
-            <div class="audio-container">
-                <div class="audio-title">Sample 4</div>
-                <audio controls>
-                    <source src="outro2.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
+                <div class="audio-container">
+                    <div class="audio-title">Sample 4</div>
+                    <audio controls>
+                        <source src="outro2.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
             </div>
         </section>
 
