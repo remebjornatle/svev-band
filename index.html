@@ -7,371 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: #0f0f0f;
-            color: #e0e0e0;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 80vh;
-            min-height: 400px;
-            overflow: hidden;
-        }
-
-        .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(15, 15, 15, 0.2) 0%,
-                rgba(15, 15, 15, 0.5) 60%,
-                rgba(15, 15, 15, 1) 100%
-            );
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 60px;
-        }
-
-        .hero-text {
-            text-align: center;
-        }
-
-        .hero-text h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 6rem;
-            font-weight: 300;
-            letter-spacing: 0.7em;
-            color: #f5f5f5;
-            text-transform: uppercase;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
-            margin-bottom: 10px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .intro {
-            text-align: center;
-            padding: 40px 0 60px;
-            animation: fadeIn 1.5s ease-in;
-        }
-
-        .tagline {
-            font-size: 1.15rem;
-            color: #b0b0b0;
-            font-weight: 300;
-            max-width: 600px;
-            margin: 0 auto 20px;
-            line-height: 1.8;
-        }
-
-        .members {
-            font-size: 0.95rem;
-            color: #b8a088;
-            font-style: italic;
-            margin-top: 10px;
-        }
-
-        .divider {
-            width: 60px;
-            height: 1px;
-            background: #b8a088;
-            margin: 0 auto 50px;
-            opacity: 0.5;
-        }
-
-        section {
-            margin-bottom: 60px;
-            animation: fadeIn 2s ease-in;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #f5f5f5;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .video-carousel {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-        }
-
-        .carousel-arrow {
-            background: none;
-            border: 1px solid rgba(184, 160, 136, 0.3);
-            color: #b8a088;
-            font-size: 1.4rem;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: border-color 0.2s, color 0.2s;
-            line-height: 1;
-        }
-
-        .carousel-arrow:hover {
-            border-color: rgba(184, 160, 136, 0.8);
-            color: #d4bfa8;
-        }
-
-        .video-thumb {
-            width: 220px;
-            cursor: pointer;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid rgba(184, 160, 136, 0.2);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            background: #1e1e1e;
-        }
-
-        .video-thumb:hover {
-            transform: translateY(-3px);
-            border-color: rgba(184, 160, 136, 0.6);
-        }
-
-        .video-thumb-img {
-            position: relative;
-            width: 100%;
-            padding-bottom: 177.78%;
-            overflow: hidden;
-        }
-
-        .video-thumb-img img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-        }
-
-        .video-thumb-img .play-btn {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 44px; height: 44px;
-            background: rgba(184, 160, 136, 0.85);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-thumb-img .play-btn::after {
-            content: '';
-            border-left: 16px solid #0f0f0f;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            margin-left: 4px;
-        }
-
-        .video-thumb-label {
-            font-size: 0.75rem;
-            color: #b8a088;
-            padding: 8px 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-align: center;
-        }
-
-        .video-credit {
-            text-align: center;
-            margin-top: 14px;
-            font-size: 0.78rem;
-            font-style: italic;
-            color: #666;
-        }
-
-        .video-credit a {
-            color: #888;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(136, 136, 136, 0.3);
-            transition: color 0.2s;
-        }
-
-        .video-credit a:hover {
-            color: #b8a088;
-        }
-
-        /* Modal */
-        .video-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.88);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-modal.active {
-            display: flex;
-        }
-
-        .video-modal-inner {
-            position: relative;
-            width: min(90vw, 400px);
-        }
-
-        .video-modal-close {
-            position: absolute;
-            top: -36px;
-            right: 0;
-            background: none;
-            border: none;
-            color: #b8a088;
-            font-size: 1.8rem;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        .video-modal-wrapper {
-            position: relative;
-            padding-bottom: 177.78%;
-            height: 0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .video-modal-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border: 0;
-        }
-
-        .audio-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .audio-container {
-            background: #1e1e1e;
-            padding: 18px;
-            border-radius: 4px;
-            border: 1px solid rgba(184, 160, 136, 0.2);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .audio-container:hover {
-            transform: translateY(-2px);
-            border-color: rgba(184, 160, 136, 0.5);
-        }
-
-        .audio-title {
-            font-size: 0.95rem;
-            color: #b8a088;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        audio {
-            width: 100%;
-            outline: none;
-            filter: invert(1) hue-rotate(180deg);
-        }
-
-        .contact {
-            text-align: center;
-            background: #1e1e1e;
-            padding: 40px;
-            border-radius: 4px;
-            border: 1px solid rgba(184, 160, 136, 0.2);
-        }
-
-        .contact a {
-            color: #b8a088;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-            display: inline-block;
-            margin: 10px 0;
-        }
-
-        .contact a:hover {
-            color: #d4bfa8;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #555;
-            font-size: 0.85rem;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .hero {
-                height: 60vh;
-                min-height: 300px;
-            }
-
-            .hero-text h1 {
-                font-size: 3.5rem;
-                letter-spacing: 0.25em;
-            }
-
-            .hero-overlay {
-                padding-bottom: 40px;
-            }
-
-            .container {
-                padding: 0 20px;
-            }
-
-            h2 {
-                font-size: 1.4rem;
-            }
-
-            .audio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .audio-container {
-                padding: 16px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="hero">
@@ -386,18 +22,13 @@
     <div class="container">
         <div class="intro">
             <p class="tagline">
-                A trio merging nordic folk music, classical music and electronics with experimental elements
-            </p>
-            <p class="members">
-                Øystein Stensheim · Simon Berg · Bjørn-Atle Reme
+                A trio merging nordic folk music, classical music and electronics
             </p>
         </div>
 
         <div class="divider"></div>
 
         <section class="video-section">
-            <h2>Watch and Listen</h2>
-
             <div class="video-carousel">
                 <button class="carousel-arrow" id="prevBtn">&#8249;</button>
                 <div class="video-thumb" id="carouselThumb">
@@ -410,6 +41,9 @@
                 <button class="carousel-arrow" id="nextBtn">&#8250;</button>
             </div>
             <p class="video-credit">Recorded at <a href="https://www.transformatorscene.no" target="_blank" rel="noopener">Transformator Scene</a></p>
+            <p class="members">
+                Øystein Stensheim · Simon Berg · Bjørn-Atle Reme
+            </p>
         </section>
 
         <div class="video-modal" id="videoModal">
@@ -463,11 +97,8 @@
 
         <div class="divider"></div>
 
-        <section class="contact">
-            <h2>Contact</h2>
-            <p>
-                <a href="mailto:remebjornatle@gmail.com">remebjornatle@gmail.com</a>
-            </p>
+        <section class="booking-card">
+            <a class="booking-btn" href="booking.html">Booking</a>
         </section>
 
         <footer>
@@ -476,9 +107,9 @@
     </div>
     <script>
         const videos = [
-            { id: '9C6_uvqbNl0', label: 'Framand' },
-            { id: 'us4nLILp_PA', label: 'Blake' },
-            { id: 'vMelpFDjzGU', label: 'Dvorak' }
+            { id: 'kMK1OHDtRAE', label: 'Framand' },
+            { id: 'sNM2RXPrZ8k', label: 'Dvorak' },
+            { id: '9ZDCnkGbRj0', label: 'Blake' }
         ];
 
         let current = 0;
