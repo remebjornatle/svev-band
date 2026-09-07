@@ -410,27 +410,20 @@ section p {
 .price-cards {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 6px;
     margin-bottom: 16px;
 }
 
 .price-card {
-    display: flex;
+    display: grid;
+    grid-template-columns: 130px 100px auto;
     align-items: baseline;
-    justify-content: space-between;
-    flex-wrap: wrap;
     gap: 4px 12px;
     background: #1e1e1e;
     border: 1px solid rgba(184, 160, 136, 0.2);
     border-radius: 4px;
-    padding: 10px 14px;
-}
-
-.price-info {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap;
+    padding: 8px 14px;
 }
 
 .price-name {
@@ -525,6 +518,10 @@ section p {
 }
 
 @media (max-width: 600px) {
+    .price-card {
+        grid-template-columns: minmax(90px, 110px) minmax(80px, 100px) auto;
+    }
+
     .hero {
         height: 60vh;
         min-height: 300px;
